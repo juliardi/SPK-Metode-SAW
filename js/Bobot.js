@@ -9,3 +9,9 @@ function Bobot(criteriaName, value) {
     this.criteriaName = criteriaName;
     this.value = value;
 }
+
+Bobot.prototype.print = function() {
+    var str = 'bName : '+this.criteriaName + ' | ';
+    str += 'bValue : '+this.value;
+    console.log(str);
+};

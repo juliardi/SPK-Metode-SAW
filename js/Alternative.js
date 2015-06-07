@@ -31,6 +31,24 @@ Alternative.prototype.addNormalizedCriteria = function(criteria) {
     }
 };
 
+Alternative.prototype.removeCriteria = function(criteriaName) {
+    for(var i = 0; i<this.criteria.length; i++) {
+        if(this.criteria[i].name === criteriaName) {
+            this.criteria.splice(i, 1);
+            return;
+        }
+    }
+};
+
+Alternative.prototype.removeNormalizedCriteria = function(criteriaName) {
+    for(var i = 0; i<this.normalizedCriteria.length; i++) {
+        if(this.normalizedCriteria[i].name === criteriaName) {
+            this.normalizedCriteria.splice(i, 1);
+            return;
+        }
+    }
+};
+
 /**
  * Method untuk menghitung nilai perangkingan alternatif
  * @param Bobot bobot
@@ -41,7 +59,7 @@ Alternative.prototype.calculateRank = function(bobot) {
         var cr = this.getNormalizedCriteria(bobot[i].criteriaName);
         result += parseFloat(cr.value) * parseFloat(bobot[i].value);
     }
-    
+
     this.setRank(result);
 };
 
@@ -108,6 +126,6 @@ Alternative.prototype.printNormalizedCriteria = function() {
 Alternative.prototype.toString = function() {
     var str = 'Nama : '+this.name + '<br>';
     str += 'Nilai Peringkat : '+this.getRank() + '<br><br>';
-    
+
     return str;
 };

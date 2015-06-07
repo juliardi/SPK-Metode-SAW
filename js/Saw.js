@@ -27,6 +27,15 @@ Saw.prototype.addBobot = function(bobot) {
     }
 };
 
+Saw.prototype.removeBobot = function(bobotName) {
+    for (var i = 0; i < this.bobot.length; i++) {
+        if(this.bobot[i].criteriaName === bobotName) {
+            this.bobot.splice(i, 1);
+            return;
+        }
+    }
+};
+
 /**
  * Method untuk melakukan normalisasi nilai kriteria pada semua alternatif
  */
@@ -174,6 +183,12 @@ Saw.prototype.sortAlternativeByRank = function() {
 Saw.prototype.printRanks = function() {
     for (var i = 0; i < this.alternative.length; i++) {
         this.alternative[i].print();
+    }
+};
+
+Saw.prototype.printBobot = function() {
+    for (var i = 0; i < this.bobot.length; i++) {
+        this.bobot[i].print();
     }
 };
 

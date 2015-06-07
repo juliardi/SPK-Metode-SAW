@@ -5,19 +5,21 @@ window.onload = init();
 function init() {
     //Inisialisasi Saw
     var saw = new Saw();
-    
+
     //Tentukan Bobot
     var b1 = new Bobot('C1', 0.35);
     var b2 = new Bobot('C2', 0.25);
     var b3 = new Bobot('C3', 0.25);
     var b4 = new Bobot('C4', 0.15);
-    
+
     //Tambahkan bobot ke Saw
     saw.addBobot(b1);
     saw.addBobot(b2);
     saw.addBobot(b3);
     saw.addBobot(b4);
-    
+    //Menghapus bobot
+    saw.removeBobot('C3');
+
     //Buat Alternative pertama
     var Indra = new Alternative('Indra');
     //Tentukan nilai kriteria untuk alternatif pertama
@@ -30,9 +32,11 @@ function init() {
     Indra.addCriteria(cIn2);
     Indra.addCriteria(cIn3);
     Indra.addCriteria(cIn4);
+    //Menghapus criteria
+    Indra.removeCriteria('C3');
     //Masukkan alternatif pertama ke Saw
     saw.addAlternative(Indra);
-    
+
     //Buat Alternative kedua
     var Roni = new Alternative('Roni');
     //Tentukan nilai kriteria untuk alternatif kedua
@@ -45,9 +49,10 @@ function init() {
     Roni.addCriteria(cr2);
     Roni.addCriteria(cr3);
     Roni.addCriteria(cr4);
+    Roni.removeCriteria('C3');
     //Masukkan alternatif kedua ke Saw
     saw.addAlternative(Roni);
-    
+
     //Buat Alternative ketiga
     var Putri = new Alternative('Putri');
     //Tentukan nilai kriteria untuk alternatif ketiga
@@ -60,17 +65,34 @@ function init() {
     Putri.addCriteria(cp2);
     Putri.addCriteria(cp3);
     Putri.addCriteria(cp4);
+    Putri.removeCriteria('C3');
     //Masukkan alternatif ketiga ke Saw
     saw.addAlternative(Putri);
-    
+
+     //Buat Alternative ketiga
+    var cmenk = new Alternative('Cmenk');
+    //Tentukan nilai kriteria untuk alternatif ketiga
+    var ck1 = new Criteria('C1', 55);
+    var ck2 = new Criteria('C2', 55);
+    var ck3 = new Criteria('C3', 50);
+    var ck4 = new Criteria('C4', 55);
+    //Masukkan nilai kriteria ke alternatif ketiga
+    cmenk.addCriteria(ck1);
+    cmenk.addCriteria(ck2);
+    cmenk.addCriteria(ck3);
+    cmenk.addCriteria(ck4);
+    cmenk.removeCriteria('C3');
+    //Masukkan alternatif ketiga ke Saw
+    saw.addAlternative(cmenk);
+
     //Normalisasi kriteria
     saw.normalize();
-    
-    //Hitung perangkingan
+    //
+    // //Hitung perangkingan
     saw.calculateRank();
-    
+
     var output = getId("hasil");
-    
+
     var arrHasil = saw.getAlternativePriority();
     for(var i = 0; i<arrHasil.length; i++) {
         output.innerHTML += arrHasil[i].toString();
